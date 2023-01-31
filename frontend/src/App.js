@@ -11,7 +11,7 @@ import Pokemon from './components/Pokemon';
 import {useState} from 'react';
 function App() {
   const [pokemonsFrontPage, setPokemonsFrontPage] = useState([]);
-  const [pokemon, setPokemon] = useState([]);
+  const [pokemon, setPokemon] = useState(null);
   const [currentPage,setCurrentPage]=useState(1);
   const [postsPerPage,setPostsPerPage]=useState(40);
 
@@ -25,8 +25,8 @@ function App() {
   return (
     <div className="container">
       <Header />
-      <Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage}  />
       <Routes>
+        <Route path="/pokemon/" element={<Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage}  />} />
         <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} setPokemon={setPokemon} />} />
       </Routes>
       <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
