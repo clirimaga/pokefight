@@ -5,15 +5,29 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
 import Header from './components/Header';
 import Pokemons from './components/Pokemons';
-function App() {
+import  { Pagination } from './components/Pagination';
 
+import {useState} from 'react';
+function App() {
+  const [pokemonsFrontPage, setPokemonsFrontPage] = useState([]);
+  const [currentPage,setCurrentPage]=useState(1);
+  const [postsPerPage,setPostsPerPage]=useState(40);
+
+
+   //get current posts
+ const indexOfLastPost = currentPage * postsPerPage;
+ const indexOfFirstPost = indexOfLastPost - postsPerPage;
+ const currentPosts = pokemonsFrontPage.slice(indexOfFirstPost,indexOfLastPost)
+ // change page
+ const paginate = (pageNumber) => setCurrentPage(pageNumber);
   return (
-    <div className="App">
+    <div className="container">
       <Header />
-      <Pokemons />
+      <Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage}  />
       <Routes>
         <Route path="/header" element={<div></div> } />
       </Routes>
+      <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
     </div>
   );
 }

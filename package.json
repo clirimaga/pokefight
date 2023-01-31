@@ -1,0 +1,27 @@
+{
+  "name": "pokefight",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/clirimaga/pokefight.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clirimaga/pokefight/issues"
+  },
+  "homepage": "https://github.com/clirimaga/pokefight#readme",
+  "dependencies": {
+    "axios": "^1.2.6",
+    "bootstrap": "^5.2.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "react-bootstrap": "^2.7.0",
+    "react-router-dom": "^6.8.0"
+  }
+}
