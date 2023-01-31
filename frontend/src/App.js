@@ -6,10 +6,12 @@ import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
 import Header from './components/Header';
 import Pokemons from './components/Pokemons';
 import  { Pagination } from './components/Pagination';
+import Pokemon from './components/Pokemon';
 
 import {useState} from 'react';
 function App() {
   const [pokemonsFrontPage, setPokemonsFrontPage] = useState([]);
+  const [pokemon, setPokemon] = useState([]);
   const [currentPage,setCurrentPage]=useState(1);
   const [postsPerPage,setPostsPerPage]=useState(40);
 
@@ -25,7 +27,7 @@ function App() {
       <Header />
       <Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage}  />
       <Routes>
-        <Route path="/header" element={<div></div> } />
+        <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} setPokemon={setPokemon} />} />
       </Routes>
       <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
     </div>
