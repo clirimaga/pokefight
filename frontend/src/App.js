@@ -26,10 +26,11 @@ function App() {
     <div className="container">
       <Header />
       <Routes>
-        <Route path="/pokemon/" element={<Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage}  />} />
+        <Route path="/" element={<div><Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage} />
+   <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
+        </div> }></Route> 
         <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} setPokemon={setPokemon} />} />
       </Routes>
-      <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
     </div>
   );
 }

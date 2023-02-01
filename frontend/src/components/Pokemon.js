@@ -1,11 +1,10 @@
 import React from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams ,useNavigate } from 'react-router-dom'
 import {useEffect} from 'react'
 import axios from 'axios';
-
 function Pokemon({pokemon, setPokemon}) {
     const {id} = useParams();
-    
+    const navigate = useNavigate();
     useEffect(() => {
       axios
         .get(`http://localhost:4001/pokemon/${id}`)
@@ -29,7 +28,6 @@ function Pokemon({pokemon, setPokemon}) {
 
   return (
 <div className="recipes">
-    
 {pokemon ? (
         <div>
           <p>Pokemon name: {pokemon.name.english}</p>
@@ -44,6 +42,9 @@ function Pokemon({pokemon, setPokemon}) {
       ) : (
         <p>Loading...</p>
       )}
+    <div>
+      <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Go back</button>
+    </div>
 </div>
   )
 }

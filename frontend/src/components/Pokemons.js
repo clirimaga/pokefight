@@ -2,9 +2,10 @@ import {useState,useEffect} from 'react'
 import axios from 'axios';
 import './pokemon.css'
 import { Link } from "react-router-dom";
+import pokemonsJson from './pokemonsJson';
 
-export default function Pokemons({pokemonsFrontPage, setPokemonsFrontPage}) {
-
+export default function Pokemons({pokemonsFrontPage, setPokemonsFrontPage,postsPerPage,totalPosts,paginate}) {
+const [searchTerm,setSearchTerm] = useState('');
 useEffect(()=>{
   axios
   .get('http://localhost:4001/pokemon')
@@ -14,16 +15,24 @@ useEffect(()=>{
   })
   .catch(err=> console.log(err))
 },[])
-  return (
-/*     <div>
-       {pokemonsFrontPage.map(pokemon=> {
-        return <h1>{pokemon.name.english}</h1>
-       })}
-        </div> */
 
+console.log(pokemonsJson);
+
+
+  return (
+<>
+<div>
+  <input type='text' placeholder='Search a pokemon' onChange={(e)=> setSearchTerm(e.target.value)} />
+</div>
 <div className="recipes">
-  {pokemonsFrontPage?.map((pokemon) => {
+  {pokemonsFrontPage.filter((pokemon) =>{
+    if(searchTerm == ""){return pokemon}
+    else if (pokemon.name.english.toLowerCase().includes(searchTerm.toLocaleLowerCase())){
+      return pokemon
+    }
+  })?.map((pokemon) => {
     return (
+      <div>
       <div className="recipe" key={pokemon.id}>
 {/*         <div className="imagediv">
           {pokemon.fields.recipeImages?.map((image) => {
@@ -49,14 +58,16 @@ useEffect(()=>{
                 <button
                   type="button"
                   className="btn btn-secondary btn-m recipedetailbutton"
-                >
+                  >
                   view details
                 </button>
               </Link>
     </div>
+    </div>
   );
 })}
 </div>
+</>
 
 )
 }
