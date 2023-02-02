@@ -7,14 +7,19 @@ import Header from './components/Header';
 import Pokemons from './components/Pokemons';
 import  { Pagination } from './components/Pagination';
 import Pokemon from './components/Pokemon';
+import SelectedPokemon from './components/SelectedPokemon';
 
 import {useState} from 'react';
 function App() {
   const [pokemonsFrontPage, setPokemonsFrontPage] = useState([]);
   const [pokemon, setPokemon] = useState(null);
   const [currentPage,setCurrentPage]=useState(1);
-  const [postsPerPage,setPostsPerPage]=useState(40);
+  const [postsPerPage,setPostsPerPage]=useState(809);
 
+  const index = Math.floor(Math.random() * pokemonsFrontPage.length);
+  const pokemon2 = pokemonsFrontPage.slice(index, index+1)
+  console.log(pokemon2)
+  
 
    //get current posts
  const indexOfLastPost = currentPage * postsPerPage;
@@ -29,6 +34,7 @@ function App() {
         <Route path="/" element={<div><Pokemons pokemonsFrontPage={currentPosts} setPokemonsFrontPage={setPokemonsFrontPage} />
    <Pagination postsPerPage={postsPerPage} totalPosts={pokemonsFrontPage.length} paginate={paginate} />
         </div> }></Route> 
+        <Route path="/pokemon/selectedpokemon/:name" element={<SelectedPokemon  pokemon2={pokemon2} pokemon={pokemon} setPokemon={setPokemon} />}   />
         <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} setPokemon={setPokemon} />} />
       </Routes>
     </div>

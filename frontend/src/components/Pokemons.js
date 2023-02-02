@@ -16,7 +16,7 @@ useEffect(()=>{
   .catch(err=> console.log(err))
 },[])
 
-console.log(pokemonsJson);
+// console.log(pokemonsJson);
 
 
   return (
@@ -60,6 +60,14 @@ console.log(pokemonsJson);
                   className="btn btn-secondary btn-m recipedetailbutton"
                   >
                   view details
+                </button>
+              </Link>
+              <Link to={`/pokemon/selectedpokemon/${pokemon.name.english}`}>
+                <button
+                  type="button"
+                  className="btn btn-secondary btn-m recipedetailbutton"
+                  >
+                  Select
                 </button>
               </Link>
     </div>
