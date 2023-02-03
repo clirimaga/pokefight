@@ -2,7 +2,12 @@ import React from 'react'
 import { useParams ,useNavigate } from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import axios from 'axios';
-function SelectedPokemon({pokemon2,pokemon, setPokemon}) {
+import './pokemon.css'
+
+export default function SelectedPokemon({pokemon, setPokemon}) {
+
+  const [pokemons, setPokemons] = useState([])
+
     const {name} = useParams();
     const navigate = useNavigate();
 
@@ -10,59 +15,102 @@ function SelectedPokemon({pokemon2,pokemon, setPokemon}) {
         axios
         .get(`http://localhost:4001/pokemon/selectedpokemon/${name}`)
         .then((res) => {
-            // console.log(res.status, res.data);
-            //   if (res.status === 200) {
-                //    axios.get(`https://pokeapi.co/api/v2/pokemon/${res.data.name.english.toLowerCase()}`).then((img) => {
-                    //    console.log(img.data.sprites.front_default)
-                    res.data.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.data.id}.png`;
-                    setPokemon(res.data)
-                    
-        //     })
-        
-        //   } else {
-        //     console.error(`Failed to fetch pokemon data: ${res.status}`);
-        //   }
+          res.data.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.data.id}.png`;
+          setPokemon(res.data)
         })
         .catch((err) => {
           console.error(`Error fetching pokemon data: ${err}`);
         });
     }, [name]);
 
+    useEffect(()=>{
+      axios
+      .get('http://localhost:4001/pokemon')
+      .then((res)=>{
+        res.data.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.data.id}.png`;
+        setPokemons(res.data)
+      })
+      .catch(err=> console.log(err))
+    },[])
 
+    const pokemonRandom = pokemons[Math.floor(Math.random()*pokemons.length)]
+    console.log(pokemonRandom)
 
   return (
     <>
-<div className="recipes">
-    <div>
-      <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Go back</button>
-    </div>
-{pokemon ? (
-    <div>
-          <p>Pokemon name: {pokemon.name.english}</p>
-          <p>Pokemon type: {pokemon.type}</p>
-          <p>Pokemon Attack: {pokemon.base.Attack}</p>
-          <div className="progress">
-  <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Attack}%`}}></div>
-</div>
+      <div className='pokemonFightPage'>
+        <div className='fightingPokemon'>
+          <div className="fightingPokeCard">
+            {pokemon ? (
+              <div>
+                <p><b>Your Pokemon</b></p>
+                <p>{pokemon.name.english}</p>
+                <p>Pokemon life</p>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow={pokemon.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Attack}%`}}></div>
+                </div>
+                <img src={pokemon.url} style={{height: 200}}/>
+              </div>
+            ) : (
+              <p>Loading...</p>
+              )}
+          </div>
 
-          <img src={pokemon.url}/>
+          <div className='fightScore'>
+            <h5>Your score</h5>
+            <input type='text' placeholder='score'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='speed'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='Attack'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='Defense'></input>
+          </div>
+
+          <div className='fightScore'>
+            <h5>Computer score</h5>
+            <input type='text' placeholder='score'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='speed'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='Attack'></input>
+            <br/>
+            <br/>
+            <input type='text' placeholder='Defense'></input>
+          </div>
+
+
+          <div className="fightingPokeCard">
+            {pokemonRandom ? (
+              <div>
+                <p><b>Computer Pokemon</b></p>
+                <p>{pokemonRandom.name.english}</p>
+                <p>Pokemon life</p>
+                <div class="progress">
+                  <div class="progress-bar bg-danger" role="progressbar" aria-valuenow={pokemonRandom.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom.base.Attack}%`}}></div>
+                </div>
+                <img src={pokemonRandom.url} style={{height: 200}}/>
+              </div>
+            ) : (
+              <p>Loading...</p>
+            )}
+          </div>
         </div>
-      ) : (
-          <p>Loading...</p>
-          )}
-</div>
-<div>
-<p>Pokemon name: {pokemon2.name.english}</p>
-          <p>Pokemon type: {pokemon2.type}</p>
-          <p>Pokemon Attack: {pokemon2.base.Attack}</p>
-          <div className="progress">
-  <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon?.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base.Attack}%`}}></div>
-</div>
-
-          <img src={pokemon2.url}/>
-</div>
-          </>
+        <button className='btn btn-outline-primary'>Fight</button>
+        <div className='winnerCard'>
+          <h4>The winner is: </h4>
+        </div>
+      </div>
+      <br />
+      <div>
+        <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Play again</button>
+      </div>
+    </>
   )
 }
 
-export default SelectedPokemon;
