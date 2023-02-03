@@ -33,6 +33,7 @@ function Pokemon({pokemon, setPokemon}) {
           <p>Pokemon name: {pokemon.name.english}</p>
           <p>Pokemon type: {pokemon.type}</p>
           <p>Pokemon Attack: {pokemon.base.Attack}</p>
+          <p>Pokemon Defense: {pokemon.base.Defense}</p>
           <div className="progress">
   <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Attack}%`}}></div>
 </div>

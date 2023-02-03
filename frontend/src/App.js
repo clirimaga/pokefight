@@ -8,7 +8,7 @@ import Pokemons from './components/Pokemons';
 import  { Pagination } from './components/Pagination';
 import Pokemon from './components/Pokemon';
 import SelectedPokemon from './components/SelectedPokemon';
-
+import Fight from './components/Fight';
 import {useState} from 'react';
 function App() {
   const [pokemonsFrontPage, setPokemonsFrontPage] = useState([]);
@@ -36,7 +36,10 @@ function App() {
         </div> }></Route> 
         <Route path="/pokemon/selectedpokemon/:name" element={<SelectedPokemon  pokemon2={pokemon2} pokemon={pokemon} setPokemon={setPokemon} />}   />
         <Route path="/pokemon/:id" element={<Pokemon pokemon={pokemon} setPokemon={setPokemon} />} />
+        <Route path="/Fight/" element={<Fight  />} />
+        
       </Routes>
+      
     </div>
   );
 }
