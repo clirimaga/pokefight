@@ -29,6 +29,7 @@ export default function Pokemon({pokemon, setPokemon}) {
     }, []);
 
   return (
+
     <>
       <div className="pokemonOne">
         <div className='pokeDetail'>
