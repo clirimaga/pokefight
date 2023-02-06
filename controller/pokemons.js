@@ -44,7 +44,7 @@ const createPokemon = async (req, res) => {
 const getPokemonByName = async (req, res) => {
   const { name } = req.params;
   try {
-    const pokemon = await Pokemon.findOne({name: {$elemMatch: "english": name}});
+    const pokemon = await Pokemon.findOne({name: {$elemMatch:{ "english": name}}});
     res.json(pokemon);
   } catch (error) {
     res.status(500).send(error.messages);
