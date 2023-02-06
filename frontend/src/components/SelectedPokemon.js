@@ -3,7 +3,7 @@ import { useParams ,useNavigate } from 'react-router-dom'
 import {useState,useEffect} from 'react'
 import axios from 'axios';
 import './pokemon.css'
-
+import { TypeAnimation } from 'react-type-animation';
 export default function SelectedPokemon() {
   const [pokemon, setPokemon] = useState();
   const [pokemons, setPokemons] = useState([])
@@ -165,7 +165,23 @@ export default function SelectedPokemon() {
         </div>
          {loosing ? (
         <div className='winnerCard'>
-          <h4>The winner is: {winning?.name.english}</h4>
+          <h4>The winner is:   
+          <TypeAnimation
+      sequence={[
+        `   ${winning?.name.english} (English)`, // Types 'One'
+        1300, // Waits 1s
+        `   ${winning?.name.french} (French)`, // Deletes 'One' and types 'Two'
+        1300, // Waits 2s
+        `   ${winning?.name.japanese} (Japanese)`, // Types 'Three' without deleting 'Two'
+        1300,
+      ]}
+      wrapper="span"
+      cursor={true}
+      repeat={Infinity}
+      speed={40}
+      style={{ fontSize: '3rem' }}
+      className='winnerName'
+      /> 🎉</h4>
         </div>) : ('')}
       </div>
       <br />

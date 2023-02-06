@@ -117,3 +117,10 @@
     margin-top: 1rem;
     padding-top: 0.5rem;
 }
+
+.winnerName {
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to right, blueviolet , darkblue);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+}
