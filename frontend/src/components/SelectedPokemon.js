@@ -75,6 +75,10 @@ export default function SelectedPokemon() {
         }
       }
 
+      const refreshPage = () =>{
+        window.location.reload();
+    } 
+
   return (
     <>
       <div className='pokemonFightPage'>
@@ -84,7 +88,7 @@ export default function SelectedPokemon() {
               <div>
                 <p><b>Your Pokemon</b></p>
                 <p>{pokemon.name.english}</p>
-                <p>Pokemon life: {pokemon.base.HP.toFixed(0)}</p>
+                <p>Pokemon life: {pokemon.base.HP.toFixed(0) > 0 ? pokemon.base.HP.toFixed(0) : 0}</p>
                 <div class="progress">
                   { pokemon.base.HP <= 0 ? (
                     <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
@@ -140,7 +144,7 @@ export default function SelectedPokemon() {
               <div>
                 <p><b>Computer Pokemon</b></p>
                 <p>{pokemonRandom.name?.english}</p>
-                <p>Pokemon life: {pokemonRandom.base.HP.toFixed(0)}</p>
+                <p>Pokemon life: {pokemonRandom.base.HP.toFixed(0) > 0 ? pokemonRandom.base.HP.toFixed(0) : 0}</p>
                 <div class="progress">
                 { pokemonRandom.base.HP <= 0 ? (
                     <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
@@ -157,6 +161,7 @@ export default function SelectedPokemon() {
         </div>
         <div>
           <button onClick={handleAttack} className='btn btn-outline-primary' disabled={!gameOn}>Fight</button>
+          <button onClick={refreshPage} className='btn btn-outline-primary'>Play again</button>
         </div>
          {loosing ? (
         <div className='winnerCard'>
@@ -165,7 +170,7 @@ export default function SelectedPokemon() {
       </div>
       <br />
       <div>
-        <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Play again</button>
+        <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Choose different pokemon</button>
       </div>
     </>
   )
