@@ -8,6 +8,9 @@ export default function SelectedPokemon() {
   const [pokemon, setPokemon] = useState();
   const [pokemons, setPokemons] = useState([])
   const [pokemonRandom, setPokemonRandom] = useState()
+  const [winning, setWinning] = useState()
+  const [loosing, setLoosing] = useState()
+  const [gameOn, setGameOn] = useState(true)
 
     const {name} = useParams();
     const navigate = useNavigate();
@@ -31,13 +34,9 @@ export default function SelectedPokemon() {
         const random = res.data[Math.floor(Math.random()*res.data.length)];
         random.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${random.id}.png`;
         setPokemonRandom(random)
-        // console.log(random)
       })
       .catch(err=> console.log(err))
     },[])
-
-//  const pokemonRandom = pokemons[Math.floor(Math.random()*pokemons.length)]
-//    console.log(pokemonRandom)
 
     const handleAttack = () => {
       const attackPokemon = pokemon.base.Attack;
@@ -51,35 +50,30 @@ export default function SelectedPokemon() {
       const damagePokemon = attackPokemon; // Math.max()-Math.min
       const damagePokemonRandom = attackPokemonRandom;
 
-      // console.log(damagePokemon)
       setPokemon({
         ...pokemon,
-        // healthPokemonRandom: prevState.health - damagePokemonRandom
         base: { ...pokemon.base, 
-          HP: pokemon.base.HP - damagePokemonRandom
+          HP: pokemon.base.HP - damagePokemonRandom / 10
         }
       })
-        // console.log(prevState.health)
         setPokemonRandom({
           ...pokemonRandom,
-          // healthPokemonRandom: prevState.health - damagePokemonRandom
           base: { ...pokemonRandom.base, 
-            HP: pokemonRandom.base.HP - damagePokemon
+            HP: pokemonRandom.base.HP - damagePokemon / 10
           }
         })
-        // setPokemonRandom((prevState) => ({
-        //   ...prevState,
-        //   // healthPokemonRandom: prevState.health - damagePokemonRandom
-        //   base: { ...prevState.base, 
-        //     HP: prevState.base.HP - damagePokemonRandom
-        //   }
-        // })); 
-        // console.log(pokemon)
-        console.log(pokemonRandom)
-        console.log(pokemon)
-    }
-
-
+        if(pokemon.base.HP - damagePokemonRandom / 10 <= 0) {
+          setWinning(pokemonRandom)
+          setLoosing(pokemon)
+        } 
+        if(pokemonRandom.base.HP - damagePokemon / 10 <= 0) {
+          setWinning(pokemon)
+          setLoosing(pokemonRandom)
+        }
+        if(pokemon.base.HP - damagePokemonRandom / 10 <= 0 || pokemonRandom.base.HP - damagePokemon / 10 <= 0) {
+          setGameOn(false)
+        }
+      }
 
   return (
     <>
@@ -90,12 +84,12 @@ export default function SelectedPokemon() {
               <div>
                 <p><b>Your Pokemon</b></p>
                 <p>{pokemon.name.english}</p>
-                <p>Pokemon life</p>
+                <p>Pokemon life: {pokemon.base.HP.toFixed(0)}</p>
                 <div class="progress">
                   { pokemon.base.HP <= 0 ? (
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
                   ) : (
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.HP}%`}}></div>
+                    <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.HP}%`}}></div>
                   )}
                 </div>
                 <img src={pokemon.url} style={{height: 200}} alt='pokemon user'/>
@@ -106,45 +100,52 @@ export default function SelectedPokemon() {
           </div>
 
           <div className='fightScore'>
-            <h5>Your score</h5>
-            <input type='text' placeholder='score'></input>
+          <h5>Speed</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon?.base?.Speed} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Speed}%`}}></div>
+            </div>
+            <br />
+            <h5>Attack</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon?.base?.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Attack}%`}}></div>
+            </div>
             <br/>
+            <h5>Defense</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-success" role="progressbar" aria-valuenow={pokemon?.base?.Defense} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Defense}%`}}></div>
+            </div>
             <br/>
-            <input type='text' placeholder='speed'></input>
-            <br/>
-            <br/>
-            <input type='text' placeholder='Attack'></input>
-            <br/>
-            <br/>
-            <input type='text' placeholder='Defense'></input>
           </div>
 
           <div className='fightScore'>
-            <h5>Computer score</h5>
-            <input type='text' placeholder='score'></input>
+          <h5>Speed</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom?.base?.Speed} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom?.base?.Speed}%`}}></div>
+            </div>
+            <br />
+            <h5>Attack</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom?.base?.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom?.base?.Attack}%`}}></div>
+            </div>
             <br/>
+            <h5>Defense</h5>
+            <div class="progress">
+              <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom?.base?.Defense} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom?.base?.Defense}%`}}></div>
+            </div>
             <br/>
-            <input type='text' placeholder='speed'></input>
-            <br/>
-            <br/>
-            <input type='text' placeholder='Attack'></input>
-            <br/>
-            <br/>
-            <input type='text' placeholder='Defense'></input>
           </div>
-
 
           <div className="fightingPokeCard">
             {pokemonRandom ? (
               <div>
                 <p><b>Computer Pokemon</b></p>
                 <p>{pokemonRandom.name?.english}</p>
-                <p>Pokemon life</p>
+                <p>Pokemon life: {pokemonRandom.base.HP.toFixed(0)}</p>
                 <div class="progress">
                 { pokemonRandom.base.HP <= 0 ? (
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow={pokemonRandom.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
+                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: "0%"}}></div>
                   ) : (
-                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow={pokemonRandom.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom.base.HP}%`}}></div>
+                    <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" aria-valuenow={pokemonRandom.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemonRandom.base.HP}%`}}></div>
                   )}
                   </div>
                 <img src={pokemonRandom.url} style={{height: 200}} alt='pokemon random'/>
@@ -154,10 +155,13 @@ export default function SelectedPokemon() {
             )}
           </div>
         </div>
-        <button onClick={handleAttack} className='btn btn-outline-primary'>Fight</button>
-        <div className='winnerCard'>
-          <h4>The winner is: </h4>
+        <div>
+          <button onClick={handleAttack} className='btn btn-outline-primary' disabled={!gameOn}>Fight</button>
         </div>
+         {loosing ? (
+        <div className='winnerCard'>
+          <h4>The winner is: {winning?.name.english}</h4>
+        </div>) : ('')}
       </div>
       <br />
       <div>

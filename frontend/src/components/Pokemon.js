@@ -34,29 +34,29 @@ export default function Pokemon({pokemon, setPokemon}) {
       <div className="pokemonOne">
         <div className='pokeDetail'>
           <div>
-            <p><h3><b>{pokemon.name.english}</b></h3></p>
-            <p><b>Pokemon type:</b> {pokemon.type}</p>
-            <p><b>Pokemon HP:</b> {pokemon.base.HP}</p>
+            <p><h3><b>{pokemon?.name?.english}</b></h3></p>
+            <p><b>Pokemon type:</b> {pokemon?.type}</p>
+            <p><b>Pokemon HP:</b> {pokemon?.base?.HP}</p>
             <div className="progress">
-              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.HP}%`}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon?.base?.HP} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.HP}%`}}>
               </div>
             </div>
-            <p><b>Pokemon Attack:</b> {pokemon.base.Attack}</p>
+            <p><b>Pokemon Attack:</b> {pokemon?.base?.Attack}</p>
             <div className="progress">
-              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Attack}%`}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon?.base?.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Attack}%`}}>
               </div>
             </div>
-            <p><b>Pokemon Defense:</b> {pokemon.base.Defense}</p>
+            <p><b>Pokemon Defense:</b> {pokemon?.base?.Defense}</p>
             <div className="progress">
-              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Defense}%`}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon?.base?.Attack} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Defense}%`}}>
               </div>
             </div>
-            <p><b>Pokemon Speed:</b> {pokemon.base.Speed}</p>
+            <p><b>Pokemon Speed:</b> {pokemon?.base?.Speed}</p>
             <div className="progress">
-              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon.base.Speed} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon.base.Speed}%`}}>
+              <div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow={pokemon?.base?.Speed} aria-valuemin="0" aria-valuemax="100" style={{width: `${pokemon?.base?.Speed}%`}}>
               </div>
             </div>
-            <img src={pokemon.url} style={{height: 200}}/>
+            <img src={pokemon?.url} style={{height: 200}}/>
           </div>
 
           <div className='pokeDescription'>
