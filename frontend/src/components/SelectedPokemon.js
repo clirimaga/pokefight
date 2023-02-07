@@ -16,6 +16,7 @@ export default function SelectedPokemon() {
     const navigate = useNavigate();
 
     useEffect(() => {
+        console.log(name);
         axios
         .get(`http://localhost:4001/pokemon/selectedpokemon/${name}`)
         .then((res) => {
