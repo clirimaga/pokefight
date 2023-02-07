@@ -9,7 +9,7 @@ const pokemonSchema = new Schema({
     chinese: { type: String },
     french: { type: String },
   },
-  type: { type: String },
+  type: [{ type: String }, { type: String }],
   base: {
     HP: { type: Number },
     Attack: { type: Number },

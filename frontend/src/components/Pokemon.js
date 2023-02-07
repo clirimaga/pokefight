@@ -30,7 +30,7 @@ export default function Pokemon({pokemon, setPokemon}) {
 
   return (
 
-    <>
+    <div className='pokecont'>
       <div className="pokemonOne">
         <div className='pokeDetail'>
           <div>
@@ -69,6 +69,6 @@ export default function Pokemon({pokemon, setPokemon}) {
       <div>
         <button className='btn btn-outline-primary' onClick={()=> navigate(-1)} >Go back</button>
       </div>
-    </>
+    </div>
   )
 }

@@ -44,7 +44,7 @@ useEffect(()=>{
                 </Link>
               </div>
               
-              {<img src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png' alt='pokemon image'/>}
+              {<img src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`} alt='pokemon image'/>}
               <div className="pokeTitle">
                 {pokemon.name.english}
               </div>

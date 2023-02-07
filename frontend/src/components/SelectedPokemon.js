@@ -83,7 +83,7 @@ export default function SelectedPokemon() {
   return (
     <>
       <div className='pokemonFightPage'>
-        <div className='fightingPokemon'>
+        <div className='fightingPokemon d-flex flex-col flex-wrap'>
           <div className="fightingPokeCard">
             {pokemon ? (
               <div>

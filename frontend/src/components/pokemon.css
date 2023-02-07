@@ -1,3 +1,7 @@
+.bg-lila {
+    background-color: #8155ad;
+}
+
 .pokemonPage {
     display: flex;
     flex-direction: row;
@@ -11,7 +15,7 @@
 }
 
 .poke-card {
-    width: 17%;
+    width: 12rem;
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
@@ -44,6 +48,14 @@
 
 .poke-type {
     padding-bottom: 1rem;
+}
+
+.pokecont {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    gap: 1rem;
 }
 
 .pokemonOne {
@@ -94,8 +106,7 @@
 }
 
 .fightingPokeCard {
-    width: 15rem;
-    height: 25rem;
+    min-width: 14rem;
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
