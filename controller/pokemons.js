@@ -20,17 +20,6 @@ const getPokemon = async (req, res) => {
   }
 };
 
-// // by field
-// // const getBlog = async (req, res) => {
-// //     const { name } = req.params;
-// //     try {
-// //       const blog = await Blog.findOne({username: name});
-// //       res.json(blog);
-// //     } catch (error) {
-// //       res.status(500).send(error.messages);
-// //     }
-// //   };
-
 const createPokemon = async (req, res) => {
   const { id, name, type, base } = req.body;
 
@@ -57,23 +46,3 @@ module.exports = {
   createPokemon,
   getPokemonByName,
 };
-
-// app.get('/pokemon', (req,res) => {
-//     res.json(jsonData);
-// })
-
-// app.get('/pokemon/:id', (req,res) => {
-//     const {id} = req.params;
-//     console.log(id);
-//     if(id > jsonData.length) {
-//         res.status(404).send('pokemon not found')
-//     } else {
-//         res.json(jsonData[id - 1]);
-//     }
-// })
-
-// app.get('/pokemon/selectedpokemon/:name',(req,res)=>{
-//     const {name}= req.params;
-//     const selectedName = jsonData.find(pokemon => pokemon.name.english === name);
-//     res.status(200).json(selectedName);
-// })
