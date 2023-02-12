@@ -9,7 +9,7 @@ export default function Pokemon({ pokemon, setPokemon }) {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get(`http://localhost:4001/pokemon/${id}`)
+      .get(`https://fair-lime-mussel-tam.cyclic.app/pokemon/${id}`)
       .then((res) => {
         console.log(res.status, res.data);
         if (res.status === 200) {

@@ -15,7 +15,7 @@ export default function Pokemons({
 
   useEffect(() => {
     axios
-      .get("http://localhost:4001/pokemon")
+      .get("https://fair-lime-mussel-tam.cyclic.app/pokemon")
       .then((res) => {
         console.log(res.data);
         setPokemonsFrontPage(res.data);

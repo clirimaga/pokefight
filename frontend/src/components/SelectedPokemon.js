@@ -18,7 +18,7 @@ export default function SelectedPokemon() {
   useEffect(() => {
     console.log(name);
     axios
-      .get(`http://localhost:4001/pokemon/selectedpokemon/${name}`)
+      .get(`https://fair-lime-mussel-tam.cyclic.app/pokemon/selectedpokemon/${name}`)
       .then((res) => {
         res.data.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.data.id}.png`;
         setPokemon(res.data);

@@ -7,7 +7,7 @@ export default function Leaderboard() {
   const navigate = useNavigate();
   useEffect(() => {
     axios
-      .get("http://localhost:4001/leaderboard")
+      .get("https://fair-lime-mussel-tam.cyclic.app/leaderboard")
       .then((res) => {
         console.log(res.data);
         setWinners(res.data);
