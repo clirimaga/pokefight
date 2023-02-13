@@ -30,7 +30,7 @@ export default function SelectedPokemon() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4001/pokemon")
+      .get("https://fair-lime-mussel-tam.cyclic.app/pokemon")
       .then((res) => {
         const random = res.data[Math.floor(Math.random() * res.data.length)];
         random.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${random.id}.png`;
@@ -264,20 +264,20 @@ export default function SelectedPokemon() {
             )}
           </div>
         </div>
-        <div>
+        <div className="d-flex flex-row gap-3">
           <button
             onClick={handleAttack}
-            className="btn btn-outline-primary"
+            className="btn btn-primary"
             disabled={!gameOn}
           >
             Fight
           </button>
-          <button onClick={refreshPage} className="btn btn-outline-primary">
+          <button onClick={refreshPage} className="btn btn-primary">
             Play again
           </button>
           <button
             onClick={() => navigate("/leaderboard")}
-            className="btn btn-outline-primary"
+            className="btn btn-primary"
           >
             See Leaderboard
           </button>
@@ -312,10 +312,10 @@ export default function SelectedPokemon() {
       <br />
       <div>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-primary mb-3"
           onClick={() => navigate(-1)}
         >
-          Choose different pokemon
+          Choose a different pokemon
         </button>
       </div>
     </>

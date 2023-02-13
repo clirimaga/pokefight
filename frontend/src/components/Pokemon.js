@@ -115,7 +115,7 @@ export default function Pokemon({ pokemon, setPokemon }) {
       <br />
       <div>
         <button
-          className="btn btn-outline-primary"
+          className="btn btn-primary mb-3"
           onClick={() => navigate(-1)}
         >
           Go back

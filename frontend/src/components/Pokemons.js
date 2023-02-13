@@ -27,7 +27,7 @@ export default function Pokemons({
     <>
       <button
         onClick={() => navigate("/leaderboard")}
-        className="btn btn-outline-primary"
+        className="btn btn-primary mt-3"
       >
         See Leaderboard
       </button>

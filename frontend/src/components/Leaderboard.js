@@ -16,7 +16,11 @@ export default function Leaderboard() {
       .catch((err) => console.log(err));
   }, []);
   return (
+
     <div className="text-center">
+      <button onClick={() => navigate("/")} className="btn btn-primary m-3">
+        Go back
+      </button>
       <h1 className="mt-2">Top Winners</h1>
       <div>
         {winners
