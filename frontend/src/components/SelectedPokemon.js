@@ -18,7 +18,9 @@ export default function SelectedPokemon() {
   useEffect(() => {
     console.log(name);
     axios
-      .get(`https://fair-lime-mussel-tam.cyclic.app/pokemon/selectedpokemon/${name}`)
+      .get(
+        `https://fair-lime-mussel-tam.cyclic.app/pokemon/selectedpokemon/${name}`
+      )
       .then((res) => {
         res.data.url = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${res.data.id}.png`;
         setPokemon(res.data);
@@ -87,7 +89,7 @@ export default function SelectedPokemon() {
 
   const updateLeaderboard = (winning) => {
     axios
-      .post("http://localhost:4001/leaderboard", winning)
+      .post("https://fair-lime-mussel-tam.cyclic.app/leaderboard", winning)
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
@@ -311,10 +313,7 @@ export default function SelectedPokemon() {
       </div>
       <br />
       <div>
-        <button
-          className="btn btn-primary mb-3"
-          onClick={() => navigate(-1)}
-        >
+        <button className="btn btn-primary mb-3" onClick={() => navigate(-1)}>
           Choose a different pokemon
         </button>
       </div>

@@ -1,7 +1,7 @@
 import "./App.css";
 // import {useState,useEffect} from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route, Link, NavLink, useNavigate } from "react-router-dom";
+import { Routes, Route} from "react-router-dom";
 import Header from "./components/Header";
 import Pokemons from "./components/Pokemons";
 import Pokemon from "./components/Pokemon";

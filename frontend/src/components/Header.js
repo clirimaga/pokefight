@@ -1,3 +1,4 @@
+import { Nav } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import "./pokemon.css";
 
@@ -21,13 +22,13 @@ function Header() {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a
+                <NavLink
                   className="nav-link active text-white"
                   aria-current="page"
-                  href="/"
+                  to="/"
                 >
                   Home
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

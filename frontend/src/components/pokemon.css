@@ -1,6 +1,16 @@
 .bg-lila {
   background-color: #8155ad;
 }
+body {
+  background-color: #f6e3f8;
+}
+
+.cliploader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 
 .pokemonPage {
   display: flex;
@@ -91,9 +101,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 2rem;
   margin-top: 1rem;
 }
 
