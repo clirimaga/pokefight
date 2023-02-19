@@ -10,6 +10,9 @@ import { MdWaterDrop } from "react-icons/md";
 import { MdOutlineBugReport } from "react-icons/md";
 import { GiElectric } from "react-icons/gi";
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default function Pokemons({
   pokemonsFrontPage,
   setPokemonsFrontPage,
@@ -20,26 +23,29 @@ export default function Pokemons({
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   let [color, setColor] = useState("#8155ad");
-
+const [searchTerm,setSearchTerm]= useState('');
   useEffect(() => {
     axios
       .get("https://fair-lime-mussel-tam.cyclic.app/pokemon")
       .then((res) => {
-        console.log(res.data);
+        AOS.init();
+        // console.log(res.data);
         setPokemonsFrontPage(res.data);
         setLoading(false);
       })
       .catch((err) => console.log(err));
   }, []);
-
   return (
     <>
+    <div className="d-flex mt-3 gap-3">
       <button
         onClick={() => navigate("/leaderboard")}
-        className="btn btn-primary mt-3"
-      >
+        className="btn btn-primary"
+        >
         See Leaderboard
       </button>
+      <input type='search' className="search"  placeholder="Search pokemon" onChange={(e)=>setSearchTerm(e.target.value)}/>
+        </div>
       {loading ? (
         <ClipLoader
           className="cliploader"
@@ -50,15 +56,21 @@ export default function Pokemons({
           data-testid="loader"
         />
       ) : (
-        <div className="pokemonPage">
-          {pokemonsFrontPage.map((pokemon) => {
+        <div className="pokemonPage" >
+          {pokemonsFrontPage.filter((val) => {
+            if (searchTerm == '') {
+              return val}
+            else if (val.name.english.toLowerCase().includes(searchTerm.toLowerCase())) {
+              return val
+            }
+          }).map((pokemon) => {
             return (
-              <div className="poke-card" key={pokemon.id}>
+              <div className="poke-card" key={pokemon.id} data-aos="zoom-in">
                 <div className="pokeId">
                   #{pokemon.id}
                   <Link to={`/pokemon/${pokemon.id}`}>
                     <span>
-                      <svg
+                      <svg 
                         xmlns="http://www.w3.org/2000/svg"
                         width="16"
                         height="16"

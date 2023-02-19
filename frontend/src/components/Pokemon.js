@@ -32,8 +32,8 @@ export default function Pokemon({ pokemon, setPokemon }) {
   }, []);
 
   return (
-    <div className="pokecont">
-      <div className="pokemonOne">
+    <div className="pokecont ">
+      <div className="pokemonOne ">
         <div className="pokeDetail">
           <div>
             <p>

@@ -1,0 +1,5 @@
+add animation for every card
+change the base url and use .env file
+on hover change background card to a bit darker
+make the info page responsive
+add a searchbar
